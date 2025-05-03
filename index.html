@@ -17,7 +17,7 @@
     <style>
         /* デフォルトで非表示にする */
         #schedule iframe {
-            display: none;
+            display: none !important; /* !important を追加 */
             width: 100%;
             max-width: none;
             height: 600px; /* 初期表示は小さめに */
@@ -41,6 +41,25 @@
 
         .schedule-toggle:hover {
             background-color: #e0e0e0;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scheduleSection = document.getElementById('schedule');
+            const iframe = scheduleSection.querySelector('iframe');
+            const toggleButton = scheduleSection.querySelector('.schedule-toggle');
+
+            toggleButton.addEventListener('click', function() {
+                // スタイルを直接操作するのではなく、クラスを追加/削除する
+                iframe.classList.toggle('show');
+                toggleButton.textContent = iframe.classList.contains('show') ? 'スケジュールを非表示' : 'スケジュールを表示';
+            });
+        });
+    </script>
+    <style>
+        /* JavaScriptで制御するためにクラスを追加 */
+        #schedule iframe.show {
+            display: block !important; /* こちらにも !important を追加 */
         }
     </style>
 </head>
@@ -87,23 +106,5 @@
             </ul>
         </section>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const scheduleSection = document.getElementById('schedule');
-            const iframe = scheduleSection.querySelector('iframe');
-            const toggleButton = scheduleSection.querySelector('.schedule-toggle');
-
-            toggleButton.addEventListener('click', function() {
-                if (iframe.style.display === 'none') {
-                    iframe.style.display = 'block';
-                    toggleButton.textContent = 'スケジュールを非表示';
-                } else {
-                    iframe.style.display = 'none';
-                    toggleButton.textContent = 'スケジュールを表示';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
