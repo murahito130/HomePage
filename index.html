@@ -13,6 +13,36 @@
     <meta property="og:url" content="https://x.com/murahito130">
     <meta property="og:site_name" content="むらひとの色々">
     <meta property="og:locale" content="ja_JP">
+
+    <style>
+        /* デフォルトで非表示にする */
+        #schedule iframe {
+            display: none;
+            width: 100%;
+            max-width: none;
+            height: 600px; /* 初期表示は小さめに */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        /* 開閉ボタンのスタイル */
+        .schedule-toggle {
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .schedule-toggle:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -23,6 +53,7 @@
 
         <section id="schedule">
             <h2>スケジュール</h2>
+            <button class="schedule-toggle">スケジュールを開く</button>
             <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showNav=0&showTabs=0&showCalendars=0&showTitle=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
         </section>
 
@@ -56,5 +87,23 @@
             </ul>
         </section>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scheduleSection = document.getElementById('schedule');
+            const iframe = scheduleSection.querySelector('iframe');
+            const toggleButton = scheduleSection.querySelector('.schedule-toggle');
+
+            toggleButton.addEventListener('click', function() {
+                if (iframe.style.display === 'none') {
+                    iframe.style.display = 'block';
+                    toggleButton.textContent = 'スケジュールを縮小';
+                } else {
+                    iframe.style.display = 'none';
+                    toggleButton.textContent = 'スケジュールを展開';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
