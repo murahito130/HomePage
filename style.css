@@ -18,6 +18,21 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease-in-out;
+    width: 80%; /* デフォルトの幅 */
+}
+
+/* 横長の画面の場合 */
+@media screen and (orientation: landscape) and (min-width: 769px) {
+    .container {
+        width: 80%;
+    }
+}
+
+/* 縦長の画面の場合 */
+@media screen and (orientation: portrait) and (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
 }
 
 .container:hover {
@@ -83,8 +98,8 @@ li a:hover {
 /* Google Calendarの埋め込み */
 #schedule iframe {
     width: 100%; /* 親要素に合わせて幅を調整 */
-    max-width: 800px; /* 最大幅を設定 */
-    height: 800px; /* 高さをかなり大きめに設定 */
+    max-width: none; /* 最大幅を削除 */
+    height: 1200px; /* 高さをかなり大きめに設定 */
     border: 1px solid #ccc;
     border-radius: 8px;
     box-sizing: border-box; /* paddingやborderをwidth, heightに含める */
@@ -132,13 +147,13 @@ li a:hover {
     }
 
     #schedule iframe {
-        height: 700px; /* スマートフォンでのカレンダーの高さをさらに大きく */
+        height: 900px; /* スマートフォンでのカレンダーの高さをさらに大きく */
     }
 }
 
 /* さらに小さい画面向けの調整 */
 @media screen and (max-width: 480px) {
     #schedule iframe {
-        height: 750px; /* より小さい画面での高さを調整 */
+        height: 1000px; /* より小さい画面での高さを調整 */
     }
 }
