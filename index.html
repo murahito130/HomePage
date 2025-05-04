@@ -22,8 +22,10 @@
             max-width: none;
             height: 600px; /* 初期表示は小さめに */
             border: 1px solid #ccc;
-            border-radius: 8px;
+            border-radius: 4px; /* 角を少し丸く */
             box-sizing: border-box;
+            transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out; /* トランジション追加 */
+            opacity: 0; /* 初期状態を透明に */
         }
 
         /* 開閉ボタンのスタイル */
@@ -32,15 +34,25 @@
             color: #333;
             border: none;
             padding: 10px 15px;
-            border-radius: 5px;
+            border-radius: 4px; /* 角を少し丸く */
             cursor: pointer;
             margin-top: 10px;
             font-weight: bold;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* box-shadowも追加 */
         }
 
         .schedule-toggle:hover {
             background-color: #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* ホバー時に影を追加 */
+        }
+
+        /* アイコンのスタイル */
+        .sns-icon {
+            display: inline-block;
+            width: 24px; /* アイコンの幅 */
+            height: 24px; /* アイコンの高さ */
+            vertical-align: middle; /* テキストと中央揃え */
+            margin-right: 8px; /* アイコンとテキストの間隔 */
         }
     </style>
     <script>
@@ -50,9 +62,23 @@
             const toggleButton = scheduleSection.querySelector('.schedule-toggle');
 
             toggleButton.addEventListener('click', function() {
-                // スタイルを直接操作するのではなく、クラスを追加/削除する
                 iframe.classList.toggle('show');
                 toggleButton.textContent = iframe.classList.contains('show') ? 'スケジュールを非表示' : 'スケジュールを表示';
+
+                // iframeの表示/非表示でアニメーション
+                if (iframe.classList.contains('show')) {
+                    iframe.style.display = 'block';
+                    setTimeout(() => {
+                        iframe.style.opacity = 1;
+                        iframe.style.height = '600px'; // または適切な高さ
+                    }, 0);
+                } else {
+                    iframe.style.opacity = 0;
+                    iframe.style.height = '0';
+                    setTimeout(() => {
+                        iframe.style.display = 'none';
+                    }, 300);
+                }
             });
         });
     </script>
@@ -60,6 +86,8 @@
         /* JavaScriptで制御するためにクラスを追加 */
         #schedule iframe.show {
             display: block !important; /* こちらにも !important を追加 */
+            opacity: 1; /* 表示状態にする */
+            height: 600px; /* 高さを設定 */
         }
     </style>
 </head>
@@ -94,7 +122,7 @@
         <section id="sns">
             <h2>SNS</h2>
             <ul>
-                <li><a href="https://x.com/murahito130">X(旧Twitter)</a></li>
+                <li><a href="https://x.com/murahito130"><img src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png.twimg.1920.png" alt="X" class="sns-icon">X(旧Twitter)</a></li>
             </ul>
         </section>
 
