@@ -15,10 +15,10 @@ body {
     max-width: 900px;
     background-color: #fff;
     padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease-in-out;
-    width: 80%; /* デフォルトの幅 */
+    border-radius: 8px; /* 角丸を小さく */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影を弱く */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* box-shadow もtransitionに追加 */
+    width: 80%;
 }
 
 /* 横長の画面の場合 */
@@ -36,15 +36,21 @@ body {
 }
 
 .container:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px); /* ホバー時の移動距離を小さく */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* ホバー時の影を強く */
 }
 
 section {
-    margin-bottom: 40px;
-    padding: 25px;
+    margin-bottom: 30px; /* marginを小さく */
+    padding: 20px; /* paddingを小さく */
     background-color: #f9f9f9;
-    border-radius: 10px;
-    border-left: 8px solid #5c6bc0;
+    border-radius: 4px; /* 角丸を小さく */
+    border-left: 4px solid #5c6bc0; /* ボーダーを細く */
+    transition: box-shadow 0.2s ease; /* box-shadowのtransitionを追加 */
+}
+
+section:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ホバー時に影を追加 */
 }
 
 section:last-child {
@@ -53,16 +59,21 @@ section:last-child {
 
 h2 {
     color: #3f51b5;
-    font-size: 2.2em;
+    font-size: 1.8em; /* フォントサイズを小さく */
     margin-top: 0;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 15px; /* marginを小さく */
+    padding-bottom: 8px; /* paddingを小さく */
+    border-bottom: 1.5px solid #e0e0e0; /* ボーダーを細く */
 }
 
 p {
-    font-size: 1.1em;
+    font-size: 1.0em; /* フォントサイズを小さく */
     color: #555;
+    transition: color 0.3s ease; /* color の transition を追加 */
+}
+
+p:hover {
+    color: #777; /* ホバー時の色を少し変更 */
 }
 
 ul {
@@ -71,23 +82,24 @@ ul {
 }
 
 li {
-    margin-bottom: 15px;
-    padding: 15px;
+    margin-bottom: 10px; /* marginを小さく */
+    padding: 12px; /* paddingを小さく */
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-    border-left: 5px solid #00acc1;
-    transition: transform 0.2s ease-in-out;
+    border-radius: 4px; /* 角丸を小さく */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* 影を弱く */
+    border-left: 4px solid #00acc1; /* ボーダーを細く */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* box-shadow も追加 */
 }
 
 li:hover {
-    transform: translateX(3px);
+    transform: translateX(2px); /* ホバー時の移動距離を小さく */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12); /* ホバー時の影を少し強く */
 }
 
 li a {
     color: #333;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500; /* フォントの太さを少し調整 */
     transition: color 0.3s ease-in-out;
 }
 
@@ -97,12 +109,14 @@ li a:hover {
 
 /* Google Calendarの埋め込み */
 #schedule iframe {
-    width: 100%; /* 親要素に合わせて幅を調整 */
-    max-width: none; /* 最大幅を削除 */
-    height: 1200px; /* 高さをかなり大きめに設定 */
+    width: 100%;
+    max-width: none;
+    height: 600px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box; /* paddingやborderをwidth, heightに含める */
+    border-radius: 4px; /* 角を少し丸く */
+    box-sizing: border-box;
+    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out; /* トランジション追加 */
+    opacity: 0; /* 初期状態を透明に */
 }
 
 /* スマートフォン向けのスタイル */
@@ -113,47 +127,47 @@ li a:hover {
 
     .container {
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 6px; /* 角丸を小さく */
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* 影を弱く */
     }
 
     section {
-        margin-bottom: 30px;
-        padding: 15px;
-        border-radius: 8px;
-        border-left: 6px solid #5c6bc0;
+        margin-bottom: 25px; /* marginを小さく */
+        padding: 15px; /* paddingを小さく */
+        border-radius: 6px; /* 角丸を小さく */
+        border-left: 4px solid #5c6bc0; /* ボーダーを細く */
     }
 
     h2 {
-        font-size: 1.8em;
-        margin-bottom: 15px;
-        padding-bottom: 8px;
-        border-bottom: 1.5px solid #e0e0e0;
+        font-size: 1.6em; /* フォントサイズを小さく */
+        margin-bottom: 12px; /* marginを小さく */
+        padding-bottom: 6px; /* paddingを小さく */
+        border-bottom: 1.2px solid #e0e0e0; /* ボーダーを細く */
     }
 
     p {
-        font-size: 1.0em;
+        font-size: 0.95em; /* フォントサイズを小さく */
     }
 
     li {
-        margin-bottom: 10px;
-        padding: 12px;
-        border-radius: 6px;
-        border-left: 4px solid #00acc1;
+        margin-bottom: 8px; /* marginを小さく */
+        padding: 10px; /* paddingを小さく */
+        border-radius: 4px; /* 角丸を小さく */
+        border-left: 3px solid #00acc1; /* ボーダーを細く */
     }
 
     li a {
-        font-size: 0.95em;
+        font-size: 0.9em; /* フォントサイズを小さく */
     }
 
     #schedule iframe {
-        height: 900px; /* スマートフォンでのカレンダーの高さをさらに大きく */
+        height: 450px; /* スマートフォンでのカレンダーの高さを調整 */
     }
 }
 
 /* さらに小さい画面向けの調整 */
 @media screen and (max-width: 480px) {
     #schedule iframe {
-        height: 1000px; /* より小さい画面での高さを調整 */
+        height: 500px; /* より小さい画面での高さを調整 */
     }
 }
