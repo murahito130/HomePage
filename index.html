@@ -15,61 +15,61 @@
             scroll-behavior: smooth;
             background-color: #f3f3f3; /* Light grey background */
             color: #212121; /* Dark grey text */
-            line-height: 1.4; /* 行間を狭くしました */
+            line-height: 1.4;
         }
 
         .container {
-            max-width: 960px; /* Standard Material Design breakpoint */
-            margin: 24px auto; /* Increased margin for better spacing */
+            max-width: 960px;
+            margin: 24px auto;
             padding: 16px;
         }
 
         nav {
-            position: sticky; /* スクロールしても固定表示 */
+            position: sticky;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff; /* White background for contrast */
-            color: #212121; /* Dark grey text */
+            background-color: #ffffff;
+            color: #212121;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12); /* Subtle shadow */
-            padding: 12px 0; /* Slightly increased padding */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12);
+            padding: 12px 0;
         }
 
         nav ul {
             display: flex;
-            justify-content: center; /* 中央寄せ */
+            justify-content: center;
             list-style: none;
             margin: 0;
             padding: 0 16px;
         }
 
         nav li {
-            margin: 0 16px; /* Increased spacing between links */
+            margin: 0 16px;
         }
 
         nav a {
-            color: #212121; /* Dark grey text */
+            color: #212121;
             text-decoration: none;
-            font-weight: 500; /* Slightly lighter font weight */
-            padding: 8px 16px; /* Adjusted padding */
-            border-radius: 24px; /* Pill-shaped links */
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 24px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         nav a.active {
-            background-color: #6200ee; /* Primary color for active state */
+            background-color: #6200ee;
             color: #ffffff;
         }
 
         nav a:hover {
-            background-color: #e0e0e0; /* Light grey hover feedback */
+            background-color: #e0e0e0;
             color: #212121;
         }
 
         section {
-            padding: 64px 16px; /* Adjusted padding */
-            margin-top: 64px; /* Height of fixed nav */
+            padding: 64px 16px;
+            margin-top: 64px;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
@@ -81,17 +81,17 @@
         }
 
         h2 {
-            font-size: 1.75rem; /* Material Design headline 6 */
+            font-size: 1.75rem;
             font-weight: 700;
             padding-left: 16px;
             margin-bottom: 16px;
             color: #212121;
-            border-left: 4px solid #6200ee; /* Primary color accent */
+            border-left: 4px solid #6200ee;
         }
 
         ul {
             padding-left: 24px;
-            list-style-type: disc; /* Use standard disc bullet */
+            list-style-type: disc;
         }
 
         li {
@@ -99,7 +99,7 @@
         }
 
         li a {
-            color: #007bff; /* Example link color */
+            color: #007bff;
             text-decoration: none;
         }
 
@@ -109,35 +109,27 @@
 
         .sns-icon {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             vertical-align: middle;
             margin-right: 8px;
         }
 
-        /* SNSアイコンのサイズを統一するための追加CSS */
-        .sns-icon {
-            width: 24px; /* アイコンの幅 */
-            height: 24px; /* アイコンの高さ */
-            vertical-align: middle; /* テキストとアイコンを中央揃え */
-            margin-right: 8px; /* アイコンとテキストの間のスペース */
-        }
-
         .schedule-toggle {
-            background-color: #03a9f4; /* Accent color */
+            background-color: #03a9f4;
             color: white;
             border: none;
             padding: 10px 24px;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: 500; /* Medium font weight */
+            font-weight: 500;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Material Design elevation */
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
         }
 
         .schedule-toggle:hover {
-            background-color: #0288d1; /* Darker shade on hover */
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); /* Higher elevation on hover */
+            background-color: #0288d1;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         }
 
         iframe {
@@ -145,7 +137,7 @@
             width: 100%;
             max-width: none;
             height: 0;
-            border: 1px solid #e0e0e0; /* Light grey border */
+            border: 1px solid #e0e0e0;
             border-radius: 4px;
             transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
             opacity: 0;
@@ -159,7 +151,49 @@
         }
 
         html {
-            scroll-padding-top: 76px; /* Adjust for fixed nav height + padding */
+            scroll-padding-top: 76px;
+        }
+
+        /* Media Queries for Smartphones */
+        @media (max-width: 768px) {
+            .container {
+                margin: 16px auto;
+                padding: 8px;
+            }
+
+            nav ul {
+                flex-direction: column; /* Stack links vertically */
+                text-align: center; /* Center the links */
+            }
+
+            nav li {
+                margin: 8px 0; /* Reduce vertical spacing */
+            }
+
+            nav a {
+                display: block; /* Make links full-width */
+                padding: 12px 16px; /* Increase padding for touch */
+                border-radius: 0; /* Remove pill shape */
+                border-bottom: 1px solid #e0e0e0; /* Add a bottom border */
+            }
+
+            nav a.active {
+                border-bottom: 2px solid #6200ee; /* Keep the active indicator */
+            }
+
+            section {
+                padding: 32px 8px; /* Reduce padding */
+                margin-top: 56px; /* Adjust for smaller nav */
+            }
+
+            h2 {
+                font-size: 1.5rem; /* Smaller heading */
+                padding-left: 8px; /* Adjust padding */
+            }
+
+            iframe.show {
+                height: 400px; /* Adjust iframe height for smaller screens */
+            }
         }
     </style>
 </head>
@@ -240,7 +274,7 @@
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 76; // Adjust for nav height + padding
+                const sectionTop = section.offsetTop - 76;
                 if (pageYOffset >= sectionTop) {
                     current = section.getAttribute('id');
                 }
