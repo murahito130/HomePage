@@ -4,41 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>むらひとの色々</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
+        /* マテリアルデザインのカラースキーム */
+        :root {
+            --primary-color: #6200ee;
+            --primary-light-color: #b388ff;
+            --primary-dark-color: #3700b3;
+            --secondary-color: #03dac6;
+            --secondary-light-color: #6effff;
+            --secondary-dark-color: #00b2c4;
+            --text-primary: #212121;
+            --text-secondary: #757575;
+            --background: #f3f3f3;
+            --surface: #ffffff;
+            --divider: rgba(0, 0, 0, 0.12);
+        }
+
         body {
             font-family: 'Noto Sans JP', sans-serif;
             font-weight: 400;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
-            background-color: #f3f3f3; /* Light grey background */
-            color: #212121; /* Dark grey text */
-            line-height: 1.4;
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden; /* 水平スクロールを防止 */
+            box-sizing: border-box; /* paddingを要素のサイズに含める */
+            scroll-behavior: smooth; /* スムーズスクロールを有効化 */
         }
 
         .container {
             max-width: 960px;
-            margin: 24px auto;
+            margin: 8px auto;
             padding: 16px;
         }
 
+        /* ナビゲーション (PC) */
         nav {
-            position: fixed; /* Fixed positioning */
+            display: none; /* スマートフォンでは非表示 */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: #ffffff;
-            color: #212121;
+            background-color: var(--surface);
+            color: var(--text-primary);
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12);
-            padding: 12px 0;
-            transition: transform 0.3s ease-in-out; /* Add transition for smooth hiding */
-        }
-
-        nav.hidden {
-            transform: translateY(-100%); /* Hide the navigation */
+            box-shadow: 0 2px 4px var(--divider);
+            padding-top: 8px; /* 高さを狭く */
+            padding-bottom: 8px; /* 高さを狭く */
         }
 
         nav ul {
@@ -46,38 +61,77 @@
             justify-content: center;
             list-style: none;
             margin: 0;
-            padding: 0 16px;
+            padding: 0 8px; /* 左右のpaddingを調整 */
         }
 
         nav li {
-            margin: 0 16px;
+            margin: 0 4px; /* 左右のmarginを調整 */
         }
 
         nav a {
-            color: #212121;
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
-            padding: 8px 16px;
+            font-size: 0.9rem;
+            padding: 6px 12px; /* paddingを調整 */
             border-radius: 24px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         nav a.active {
-            background-color: #6200ee;
-            color: #ffffff;
+            background-color: var(--primary-color);
+            color: var(--surface);
         }
 
         nav a:hover {
-            background-color: #e0e0e0;
-            color: #212121;
+            background-color: rgba(0, 0, 0, 0.08);
+        }
+
+        /* ボトムナビゲーション (スマートフォン) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--surface);
+            color: var(--text-secondary);
+            z-index: 1000;
+            box-shadow: 0 -2px 4px var(--divider);
+            display: none; /* PCでは非表示 */
+            justify-content: space-around;
+            padding-top: 6px; /* 高さを狭く */
+            padding-bottom: 6px; /* 高さを狭く */
+        }
+
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.7rem; /* フォントサイズを少し小さく */
+            padding: 6px 8px; /* paddingを調整 */
+        }
+
+        .bottom-nav a.active {
+            color: var(--primary-color);
+        }
+
+        .bottom-nav .material-icons {
+            font-size: 1.3rem; /* アイコンサイズを少し小さく */
+            margin-bottom: 2px; /* アイコンとテキストの間隔を狭く */
         }
 
         section {
-            padding: 64px 16px;
-            margin-top: 64px; /* Initial margin to account for fixed nav */
+            padding: 24px 16px;
+            margin-top: 16px; /* ナビゲーション分のスペース */
+            background-color: var(--surface);
+            box-shadow: 0 1px 3px var(--divider);
+            border-radius: 4px;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
 
         section.visible {
@@ -86,17 +140,18 @@
         }
 
         h2 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            padding-left: 16px;
+            padding-bottom: 8px;
             margin-bottom: 16px;
-            color: #212121;
-            border-left: 4px solid #6200ee;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--primary-light-color);
         }
 
         ul {
             padding-left: 24px;
             list-style-type: disc;
+            color: var(--text-secondary);
         }
 
         li {
@@ -104,8 +159,12 @@
         }
 
         li a {
-            color: #007bff;
+            color: var(--primary-color);
             text-decoration: none;
+        }
+
+        li a:visited { /* 訪問済みのリンクの色を上書き */
+            color: var(--primary-color) !important; /* !important を追加して優先度を上げる */
         }
 
         li a:hover {
@@ -113,28 +172,27 @@
         }
 
         .sns-icon {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             vertical-align: middle;
             margin-right: 8px;
         }
 
         .schedule-toggle {
-            background-color: #03a9f4;
-            color: white;
+            background-color: var(--secondary-color);
+            color: var(--surface);
             border: none;
             padding: 10px 24px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            box-shadow: 0 1px 3px var(--divider);
         }
 
         .schedule-toggle:hover {
-            background-color: #0288d1;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            background-color: var(--secondary-dark-color);
+            box-shadow: 0 2px 6px var(--divider);
         }
 
         iframe {
@@ -142,7 +200,7 @@
             width: 100%;
             max-width: none;
             height: 0;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--divider);
             border-radius: 4px;
             transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
             opacity: 0;
@@ -152,161 +210,216 @@
         iframe.show {
             display: block;
             opacity: 1;
-            height: 600px;
+            height: 400px; /* スマートフォンでの表示を考慮して高さを調整 */
         }
 
-        html {
-            scroll-padding-top: 76px;
-        }
-
-        /* Media Queries for Smartphones */
-        @media (max-width: 768px) {
+        /* メディアクエリ (PC) */
+        @media (min-width: 769px) {
+            nav {
+                display: block;
+            }
+            .bottom-nav {
+                display: none;
+            }
             .container {
-                margin: 16px auto;
-                padding: 8px;
+                padding-bottom: 0; /* PCではボトムナビゲーション分のpaddingは不要 */
+                margin-top: 8px; /* ナビゲーションの高さに合わせて調整 */
             }
-
-            nav ul {
-                flex-direction: column; /* Stack links vertically */
-                text-align: center; /* Center the links */
-            }
-
-            nav li {
-                margin: 8px 0; /* Reduce vertical spacing */
-            }
-
-            nav a {
-                display: block; /* Make links full-width */
-                padding: 12px 16px; /* Increase padding for touch */
-                border-radius: 0; /* Remove pill shape */
-                border-bottom: 1px solid #e0e0e0; /* Add a bottom border */
-            }
-
-            nav a.active {
-                border-bottom: 2px solid #6200ee; /* Keep the active indicator */
-            }
-
             section {
-                padding: 32px 8px; /* Reduce padding */
-                margin-top: 56px; /* Adjust for smaller nav */
+                margin-top: 16px; /* PCでは標準的なmargin */
             }
+        }
 
+        /* メディアクエリ (スマートフォン) */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 0; /* スマートフォンでは上部のpaddingは不要 */
+            }
+            nav {
+                display: none;
+            }
+            .bottom-nav {
+                display: flex;
+            }
+            .container {
+                padding-bottom: 48px; /* ボトムナビゲーション分のスペースを少し小さく */
+                margin-top: 8px;
+            }
+            section {
+                margin-top: 8px;
+            }
             h2 {
-                font-size: 1.5rem; /* Smaller heading */
-                padding-left: 8px; /* Adjust padding */
+                font-size: 1.25rem;
+                margin-bottom: 12px;
+                padding-bottom: 6px;
+                border-bottom-width: 1px;
             }
-
-            iframe.show {
-                height: 400px; /* Adjust iframe height for smaller screens */
+            ul {
+                padding-left: 16px;
+            }
+            .sns-icon {
+                width: 16px;
+                height: 16px;
+                margin-right: 4px;
+            }
+            .schedule-toggle {
+                padding: 8px 16px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
 
-<nav>
-    <ul>
-        <li><a href="#introduction" class="active">自己紹介</a></li>
-        <li><a href="#madamisu">マダミス・ストプレ・TRPG</a></li>
-        <li><a href="#schedule">スケジュール</a></li>
-        <li><a href="#sns">SNS</a></li>
-        <li><a href="#bots">BOT</a></li>
-    </ul>
-</nav>
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#introduction" class="active">自己紹介</a></li>
+                <li><a href="#madamisu">マダミス・ストプレ・TRPG</a></li>
+                <li><a href="#schedule">スケジュール</a></li>
+                <li><a href="#sns">SNS</a></li>
+                <li><a href="#bots">BOT</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<div class="container">
-    <section id="introduction">
-        <h2>自己紹介</h2>
-        <p>日々プログラムを書くSE♂。</p>
-        <p>最近は、マーダーミステリー・ストーリープレイング・TRPG・スプラトゥーンで主に遊んでいる。</p>
-    </section>
+    <div class="bottom-nav">
+        <a href="#introduction" class="active">
+            <i class="material-icons">person</i>
+            自己紹介
+        </a>
+        <a href="#madamisu">
+            <i class="material-icons">casino</i>
+            マダミス
+        </a>
+        <a href="#schedule">
+            <i class="material-icons">calendar_today</i>
+            スケジュール
+        </a>
+        <a href="#sns">
+            <i class="material-icons">share</i>
+            SNS
+        </a>
+        <a href="#bots">
+            <i class="material-icons">android</i>
+            BOT
+        </a>
+    </div>
 
-    <section id="madamisu">
-        <h2>マダミス・ストプレ・TRPG</h2>
-        <ul>
-            <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml">GM可能なシナリオ</a></li>
-            <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml">通過済み・通過予定のシナリオ</a></li>
-        </ul>
-    </section>
+    <div class="container">
+        <section id="introduction">
+            <h2>自己紹介</h2>
+            <p>日々プログラムを書くSE♂。</p>
+            <p>最近は、マーダーミステリー・ストーリープレイング・TRPG・スプラトゥーンで主に遊んでいる。</p>
+        </section>
 
-    <section id="schedule">
-        <h2>スケジュール</h2>
-        <button class="schedule-toggle">スケジュールを表示</button>
-        <iframe src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showNav=0&showTabs=0&showCalendars=0&showTitle=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=amEuamFapanesuholidays@group.v.calendar.google.com&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" frameborder="0"></iframe>
-    </section>
+        <section id="madamisu">
+            <h2>マダミス・ストプレ・TRPG</h2>
+            <ul>
+                <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml">GM可能なシナリオ</a></li>
+                <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml">通過済み・通過予定のシナリオ</a></li>
+            </ul>
+        </section>
 
-    <section id="sns">
-        <h2>SNS等</h2>
-        <ul>
-            <li><a href="https://x.com/murahito130"><img class="sns-icon" src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png" alt="X" />X (旧Twitter)</a></li>
-            <li><a href="https://github.com/murahito130/murahito130"><img class="sns-icon" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github" />github</a></li>
-            <li><a href="https://lounge.nintendo.com/friendcode/0645-0135-9421/C7V6SDr8Vp"><img class="sns-icon" src="https://www.nintendo.com/jp/hardware/switch/img/10-mv/logo-with-shadow.png" alt="NSW" />Nintendo Switch フレンドコード SW-0645-0135-9421</a></li>
-        </ul>
-    </section>
+        <section id="schedule">
+            <h2>スケジュール</h2>
+            <button class="schedule-toggle">スケジュールを表示</button>
+            <iframe src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showNav=0&showTabs=0&showCalendars=0&showTitle=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4.YS5tb29uLjgxMkBnbWFpbC5jb2m&src=amEuamFpanesuholidays@group.v.calendar.google.com&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" frameborder="0"></iframe>
+        </section>
 
-    <section id="bots">
-        <h2>公開しているBOTとかアプリとか</h2>
-        <ul>
-            <li><a href="https://qiita.com/murahito/items/127da46d03a510f98bca">アーカイブ君</a></li>
-            <li><a href="https://github.com/murahito130/Google-Calendar-to-Discord-Notifier">Google Calendar to Discord Notifier</a></li>
-        </ul>
-    </section>
-</div>
+        <section id="sns">
+            <h2>SNS等</h2>
+            <ul>
+                <li><a href="https://x.com/murahito130"><img class="sns-icon" src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png" alt="X" />X (旧Twitter)</a></li>
+                <li><a href="https://github.com/murahito130/murahito130.github.io"><img class="sns-icon" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github" />github</a></li>
+                <li><a href="https://lounge.nintendo.com/friendcode/0645-0135-9421/C7V6SDr8Vp"><img class="sns-icon" src="https://www.nintendo.com/jp/hardware/switch/img/10-mv/logo-with-shadow.png" alt="NSW" />Nintendo Switch フレンドコード SW-0645-0135-9421</a></li>
+            </ul>
+        </section>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const button = document.querySelector(".schedule-toggle");
-        const iframe = document.querySelector("iframe");
-        const nav = document.querySelector("nav");
-        let lastScrollTop = 0;
+        <section id="bots">
+            <h2>公開しているBOTとかアプリとか</h2>
+            <ul>
+                <li><a href="https://qiita.com/murahito/items/127da46d03a510f98bca">アーカイブ君</a></li>
+                <li><a href="https://github.com/murahito130/Google-Calendar-to-Discord-Notifier">Google Calendar to Discord Notifier</a></li>
+            </ul>
+        </section>
+    </div>
 
-        button.addEventListener("click", function () {
-            iframe.classList.toggle("show");
-            button.textContent = iframe.classList.contains("show") ? "スケジュールを非表示" : "スケジュールを表示";
-        });
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll("section");
+            const navLinksPC = document.querySelectorAll('nav a');
+            const navLinksBottom = document.querySelectorAll('.bottom-nav a');
+            const iframe = document.querySelector("iframe");
+            const scheduleToggle = document.querySelector(".schedule-toggle");
+            const navElement = document.querySelector('nav');
+            const navHeight = navElement ? navElement.offsetHeight : 0;
 
-        const sections = document.querySelectorAll("section");
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
-                }
+            // ページ読み込み時に最初のセクションをアクティブにする
+            if (sections.length > 0) {
+                const firstSectionId = sections[0].getAttribute('id');
+                navLinksPC.forEach(link => link.classList.remove('active'));
+                navLinksBottom.forEach(link => link.classList.remove('active'));
+                document.querySelector(`nav a[href="#${firstSectionId}"]`)?.classList.add('active');
+                document.querySelector(`.bottom-nav a[href="#${firstSectionId}"]`)?.classList.add('active');
+                sections[0].classList.add('visible'); // 最初のセクションを最初から表示
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+
+                        const id = entry.target.getAttribute('id');
+                        navLinksPC.forEach(link => link.classList.remove('active'));
+                        navLinksBottom.forEach(link => link.classList.remove('active'));
+                        document.querySelector(`nav a[href="#${id}"]`)?.classList.add('active');
+                        document.querySelector(`.bottom-nav a[href="#${id}"]`)?.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => observer.observe(section));
+
+            navLinksPC.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const targetPosition = targetElement.offsetTop - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
-        }, { threshold: 0.1 });
 
-        sections.forEach(section => observer.observe(section));
-
-        const navLinks = document.querySelectorAll('nav a');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - (window.innerWidth <= 768 ? 56 : 76); // Adjust offset for mobile
-                if (pageYOffset >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
+            navLinksBottom.forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const targetPosition = targetElement.offsetTop - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Hide/show navigation on scroll for mobile
-            if (window.innerWidth <= 768) {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > lastScrollTop && scrollTop > nav.offsetHeight) {
-                    nav.classList.add('hidden');
-                } else {
-                    nav.classList.remove('hidden');
-                }
-                lastScrollTop = scrollTop;
+            if (scheduleToggle && iframe) {
+                scheduleToggle.addEventListener("click", function () {
+                    iframe.classList.toggle("show");
+                    scheduleToggle.textContent = iframe.classList.contains("show") ? "スケジュールを非表示" : "スケジュールを表示";
+                });
             }
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>
