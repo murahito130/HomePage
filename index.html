@@ -1,1 +1,260 @@
-<!DOCTYPE html><html lang="ja"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>むらひとの色々</title><link rel="stylesheet" href="style.css"><meta property="og:title" content="むらひとの色々"><meta property="og:description" content="予定・通過シナリオ・GM可能シナリオ等"><meta property="og:type" content="website"><meta property="og:image" content="https://pbs.twimg.com/profile_images/1802752427151777793/l5uHLQ5V_400x400.jpg"><meta property="og:url" content="https://x.com/murahito130"><meta property="og:site_name" content="むらひとの色々"><meta property="og:locale" content="ja_JP"><style>#schedule iframe{display:none !important;width:100%;max-width:none;height:600px;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;transition:opacity .3s ease-in-out,height .3s ease-in-out;opacity:0}.schedule-toggle{background-color:#f0f0f0;color:#333;border:none;padding:10px 15px;border-radius:4px;cursor:pointer;margin-top:10px;font-weight:bold;transition:background-color .3s ease,box-shadow .3s ease}.schedule-toggle:hover{background-color:#e0e0e0;box-shadow:0 2px 4px rgba(0,0,0,.2)}.sns-icon{display:inline-block;width:24px;height:24px;vertical-align:middle;margin-right:8px}</style><script>document.addEventListener("DOMContentLoaded",function(){const t=document.getElementById("schedule"),n=t.querySelector("iframe"),i=t.querySelector(".schedule-toggle");i.addEventListener("click",function(){n.classList.toggle("show");i.textContent=n.classList.contains("show")?"スケジュールを非表示":"スケジュールを表示";n.classList.contains("show")?(n.style.display="block",setTimeout(()=>{n.style.opacity=1,n.style.height="600px"},0)):(n.style.opacity=0,n.style.height="0",setTimeout(()=>{n.style.display="none"},300))})})</script><style>#schedule iframe.show{display:block !important;opacity:1;height:600px}</style><div class="container"><section id="introduction"><h2>自己紹介</h2><p>日々プログラムを書くSE♂。スプラ・CoC・マダミスで主に遊んでいる。</section><section id="schedule"><h2>スケジュール</h2><button class="schedule-toggle">スケジュールを表示</button><iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showNav=0&showTabs=0&showCalendars=0&showTitle=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe></section><section id="switch"><h2>Switchフレンドコード</h2><ul><li><a href="https://lounge.nintendo.com/friendcode/0645-0135-9421/C7V6SDr8Vp">SW-0645-0135-9421</a></ul></section><section id="madamisu"><h2>マダミス・ストプレ・CoC等</h2><ul><li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml">GM可能なシナリオ</a><li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml">通過済み・通過予定のシナリオ</a></ul></section><section id="sns"><h2>SNS</h2><ul><li><a href="https://x.com/murahito130"><img src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png.twimg.1920.png" alt="X" class="sns-icon">X(旧Twitter)</a></ul></section><section id="bots"><h2>公開しているBOTとかアプリとか</h2><ul><li><a href="https://qiita.com/murahito/items/127da46d03a510f98bca">アーカイブ君</a><li><a href="https://github.com/murahito130/Google-Calendar-to-Discord-Notifier">Google Calendar to Discord Notifier</a></ul></section></div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>むらひとの色々</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 400;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            background-color: #f3f3f3; /* Light grey background */
+            color: #212121; /* Dark grey text */
+            line-height: 1.4; /* 行間を狭くしました */
+        }
+
+        .container {
+            max-width: 960px; /* Standard Material Design breakpoint */
+            margin: 24px auto; /* Increased margin for better spacing */
+            padding: 16px;
+        }
+
+        nav {
+            position: sticky; /* スクロールしても固定表示 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff; /* White background for contrast */
+            color: #212121; /* Dark grey text */
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.12); /* Subtle shadow */
+            padding: 12px 0; /* Slightly increased padding */
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center; /* 中央寄せ */
+            list-style: none;
+            margin: 0;
+            padding: 0 16px;
+        }
+
+        nav li {
+            margin: 0 16px; /* Increased spacing between links */
+        }
+
+        nav a {
+            color: #212121; /* Dark grey text */
+            text-decoration: none;
+            font-weight: 500; /* Slightly lighter font weight */
+            padding: 8px 16px; /* Adjusted padding */
+            border-radius: 24px; /* Pill-shaped links */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a.active {
+            background-color: #6200ee; /* Primary color for active state */
+            color: #ffffff;
+        }
+
+        nav a:hover {
+            background-color: #e0e0e0; /* Light grey hover feedback */
+            color: #212121;
+        }
+
+        section {
+            padding: 64px 16px; /* Adjusted padding */
+            margin-top: 64px; /* Height of fixed nav */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        h2 {
+            font-size: 1.75rem; /* Material Design headline 6 */
+            font-weight: 700;
+            padding-left: 16px;
+            margin-bottom: 16px;
+            color: #212121;
+            border-left: 4px solid #6200ee; /* Primary color accent */
+        }
+
+        ul {
+            padding-left: 24px;
+            list-style-type: disc; /* Use standard disc bullet */
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li a {
+            color: #007bff; /* Example link color */
+            text-decoration: none;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+
+        .sns-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        /* SNSアイコンのサイズを統一するための追加CSS */
+        .sns-icon {
+            width: 24px; /* アイコンの幅 */
+            height: 24px; /* アイコンの高さ */
+            vertical-align: middle; /* テキストとアイコンを中央揃え */
+            margin-right: 8px; /* アイコンとテキストの間のスペース */
+        }
+
+        .schedule-toggle {
+            background-color: #03a9f4; /* Accent color */
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500; /* Medium font weight */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); /* Material Design elevation */
+        }
+
+        .schedule-toggle:hover {
+            background-color: #0288d1; /* Darker shade on hover */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); /* Higher elevation on hover */
+        }
+
+        iframe {
+            display: none;
+            width: 100%;
+            max-width: none;
+            height: 0;
+            border: 1px solid #e0e0e0; /* Light grey border */
+            border-radius: 4px;
+            transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+            opacity: 0;
+            margin-top: 16px;
+        }
+
+        iframe.show {
+            display: block;
+            opacity: 1;
+            height: 600px;
+        }
+
+        html {
+            scroll-padding-top: 76px; /* Adjust for fixed nav height + padding */
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#introduction" class="active">自己紹介</a></li>
+        <li><a href="#madamisu">マダミス・ストプレ・TRPG</a></li>
+        <li><a href="#schedule">スケジュール</a></li>
+        <li><a href="#sns">SNS</a></li>
+        <li><a href="#bots">BOT</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <section id="introduction">
+        <h2>自己紹介</h2>
+        <p>日々プログラムを書くSE♂。</p>
+        <p>最近は、マーダーミステリー・ストーリープレイング・TRPG・スプラトゥーンで主に遊んでいる。</p>
+    </section>
+
+    <section id="madamisu">
+        <h2>マダミス・ストプレ・TRPG</h2>
+        <ul>
+            <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml">GM可能なシナリオ</a></li>
+            <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml">通過済み・通過予定のシナリオ</a></li>
+        </ul>
+    </section>
+
+    <section id="schedule">
+        <h2>スケジュール</h2>
+        <button class="schedule-toggle">スケジュールを表示</button>
+        <iframe src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showNav=0&showTabs=0&showCalendars=0&showTitle=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=amEuamFapanesuholidays@group.v.calendar.google.com&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" frameborder="0"></iframe>
+    </section>
+
+    <section id="sns">
+        <h2>SNS等</h2>
+        <ul>
+            <li><a href="https://x.com/murahito130"><img class="sns-icon" src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png" alt="X" />X (旧Twitter)</a></li>
+            <li><a href="https://github.com/murahito130"><img class="sns-icon" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github" />github</a></li>
+            <li><a href="https://lounge.nintendo.com/friendcode/0645-0135-9421/C7V6SDr8Vp"><img class="sns-icon" src="https://www.nintendo.com/jp/hardware/switch/img/10-mv/logo-with-shadow.png" alt="NSW" />Nintendo Switch フレンドコード SW-0645-0135-9421</a></li>
+        </ul>
+    </section>
+
+    <section id="bots">
+        <h2>公開しているBOTとかアプリとか</h2>
+        <ul>
+            <li><a href="https://qiita.com/murahito/items/127da46d03a510f98bca">アーカイブ君</a></li>
+            <li><a href="https://github.com/murahito130/Google-Calendar-to-Discord-Notifier">Google Calendar to Discord Notifier</a></li>
+        </ul>
+    </section>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const button = document.querySelector(".schedule-toggle");
+        const iframe = document.querySelector("iframe");
+
+        button.addEventListener("click", function () {
+            iframe.classList.toggle("show");
+            button.textContent = iframe.classList.contains("show") ? "スケジュールを非表示" : "スケジュールを表示";
+        });
+
+        const sections = document.querySelectorAll("section");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+
+        const navLinks = document.querySelectorAll('nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 76; // Adjust for nav height + padding
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
