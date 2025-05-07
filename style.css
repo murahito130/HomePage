@@ -1,0 +1,302 @@
+/* マテリアルデザインのカラースキーム */
+:root {
+    --primary-color: #6200ee;
+    --primary-light-color: #b388ff;
+    --primary-dark-color: #3700b3;
+    --secondary-color: #03dac6;
+    --secondary-light-color: #6effff;
+    --secondary-dark-color: #00b2c4;
+    --text-primary: #212121;
+    --text-secondary: #757575;
+    --background: #f3f3f3;
+    --surface: #ffffff;
+    --divider: rgba(0, 0, 0, 0.12);
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.5;
+    overflow-x: hidden; /* 水平スクロールを防止 */
+    box-sizing: border-box; /* paddingを要素のサイズに含める */
+    scroll-behavior: smooth; /* スムーズスクロールを有効化 */
+}
+
+.container {
+    max-width: 960px;
+    margin: 8px auto;
+    padding: 16px;
+}
+
+/* ナビゲーション (PC) */
+nav {
+    display: none; /* スマートフォンでは非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--surface);
+    color: var(--text-primary);
+    z-index: 1000;
+    box-shadow: 0 2px 4px var(--divider);
+    padding-top: 8px; /* 高さを狭く */
+    padding-bottom: 8px; /* 高さを狭く */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0 8px; /* 左右のpaddingを調整 */
+}
+
+nav li {
+    margin: 0 4px; /* 左右のmarginを調整 */
+}
+
+nav a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 6px 12px; /* paddingを調整 */
+    border-radius: 24px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav a.active {
+    background-color: var(--primary-color);
+    color: var(--surface);
+}
+
+nav a:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ボトムナビゲーション (スマートフォン) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--surface);
+    color: var(--text-secondary);
+    z-index: 1000;
+    box-shadow: 0 -2px 4px var(--divider);
+    display: none; /* PCでは非表示 */
+    justify-content: space-around;
+    padding-top: 6px; /* 高さを狭く */
+    padding-bottom: 6px; /* 高さを狭く */
+}
+
+.bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.7rem; /* フォントサイズを少し小さく */
+    padding: 6px 8px; /* paddingを調整 */
+}
+
+.bottom-nav a.active {
+    color: var(--primary-color);
+}
+
+.bottom-nav .material-icons {
+    font-size: 1.3rem; /* アイコンサイズを少し小さく */
+    margin-bottom: 2px; /* アイコンとテキストの間隔を狭く */
+}
+
+section {
+    padding: 24px 16px;
+    margin-top: 16px; /* ナビゲーション分のスペース */
+    background-color: var(--surface);
+    box-shadow: 0 1px 3px var(--divider);
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+section.visible {
+    opacity: 1;
+    transform: none;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--primary-light-color);
+}
+
+ul {
+    padding-left: 24px;
+    list-style-type: disc;
+    color: var(--text-secondary);
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+li a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+li a:visited { /* 訪問済みのリンクの色を上書き */
+    color: var(--primary-color) !important; /* !important を追加して優先度を上げる */
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+.sns-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.schedule-toggle {
+    background-color: var(--secondary-color);
+    color: var(--surface);
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px var(--divider);
+}
+
+.schedule-toggle:hover {
+    background-color: var(--secondary-dark-color);
+    box-shadow: 0 2px 6px var(--divider);
+}
+
+.responsive-iframe {
+    width: 100%;
+    max-width: none;
+    border: 1px solid var(--divider);
+    border-radius: 4px;
+    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+    margin-top: 16px;
+}
+
+/* スケジュールiframe専用のスタイル */
+#schedule-iframe {
+    display: none; /* 初期状態は非表示 */
+    height: 0; /* 初期高さは0 */
+    opacity: 0; /* 初期状態は不透明度0 */
+}
+
+#schedule-iframe.show {
+    display: block; /* 表示クラスが付与されたら表示 */
+    height: 600px; /* 表示時の高さ */
+    opacity: 1; /* 表示時は不透明 */
+}
+
+/* マダミス通過シナリオiframe専用のスタイル */
+#passed-scenario-iframe {
+    display: none; /* 初期状態は非表示 */
+    height: 0; /* 初期高さは0 */
+    opacity: 0; /* 初期状態は不透明度0 */
+}
+
+#passed-scenario-iframe.show {
+    display: block; /* 表示クラスが付与されたら表示 */
+    height: 400px; /* 表示時の高さ */
+    opacity: 1; /* 表示時は不透明 */
+}
+
+/* マダミスGM可能シナリオiframe専用のスタイル */
+#gm-scenario-iframe {
+    display: none; /* 初期状態は非表示 */
+    height: 0; /* 初期高さは0 */
+    opacity: 0; /* 初期状態は不透明度0 */
+}
+
+#gm-scenario-iframe.show {
+    display: block; /* 表示クラスが付与されたら表示 */
+    height: 400px; /* 表示時の高さ */
+    opacity: 1; /* 表示時は不透明 */
+}
+
+/* メディアクエリ (PC) */
+@media (min-width: 769px) {
+    nav {
+        display: block;
+    }
+    .bottom-nav {
+        display: none;
+    }
+    .container {
+        padding-bottom: 0; /* PCではボトムナビゲーション分のpaddingは不要 */
+        margin-top: 56px; /* ナビゲーションの高さに合わせて調整 */
+    }
+    section {
+        margin-top: 16px; /* PCでは標準的なmargin */
+    }
+    #gm-scenario-toggle, #passed-scenario-toggle {
+        margin-top: 16px; /* PCでのボタン配置 */
+    }
+}
+
+/* メディアクエリ (スマートフォン) */
+@media (max-width: 768px) {
+    body {
+        padding-top: 0; /* スマートフォンでは上部のpaddingは不要 */
+    }
+    nav {
+        display: none;
+    }
+    .bottom-nav {
+        display: flex;
+    }
+    .container {
+        padding-bottom: 48px; /* ボトムナビゲーション分のスペースを少し小さく */
+        margin-top: 8px;
+    }
+    section {
+        margin-top: 8px;
+    }
+    h2 {
+        font-size: 1.25rem;
+margin-bottom: 12px;
+        padding-bottom: 6px;
+        border-bottom-width: 1px;
+    }
+    ul {
+        padding-left: 16px;
+    }
+    .sns-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+    }
+    .schedule-toggle {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    #schedule-iframe.show {
+        height: 300px; /* スマートフォンでの表示時の高さ */
+    }
+    #gm-scenario-toggle, #passed-scenario-toggle {
+        margin-top: 12px; /* スマートフォンでのボタン配置 */
+    }
+    #gm-scenario-iframe.show, #passed-scenario-iframe.show {
+        height: 300px; /* スマートフォンでの表示時の高さ */
+    }
+}
