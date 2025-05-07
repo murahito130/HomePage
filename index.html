@@ -195,22 +195,33 @@
             box-shadow: 0 2px 6px var(--divider);
         }
 
-        iframe {
-            display: none;
+        .responsive-iframe {
             width: 100%;
             max-width: none;
-            height: 0;
             border: 1px solid var(--divider);
             border-radius: 4px;
             transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
-            opacity: 0;
             margin-top: 16px;
         }
 
-        iframe.show {
-            display: block;
-            opacity: 1;
-            height: 400px; /* スマートフォンでの表示を考慮して高さを調整 */
+        /* スケジュールiframe専用のスタイル */
+        #schedule-iframe {
+            display: none; /* 初期状態は非表示 */
+            height: 0; /* 初期高さは0 */
+            opacity: 0; /* 初期状態は不透明度0 */
+        }
+
+        #schedule-iframe.show {
+            display: block; /* 表示クラスが付与されたら表示 */
+            height: 400px; /* 表示時の高さ */
+            opacity: 1; /* 表示時は不透明 */
+        }
+
+        /* マダミスiframe専用のスタイル */
+        #madamisu-iframe {
+            height: 400px; /* 初期表示する高さ */
+            opacity: 1; /* 初期表示は不透明 */
+            display: block; /* 初期表示 */
         }
 
         /* メディアクエリ (PC) */
@@ -266,6 +277,12 @@
                 padding: 8px 16px;
                 font-size: 0.9rem;
             }
+            #madamisu-iframe {
+                height: 300px; /* スマートフォンでの初期表示の高さ */
+            }
+            #schedule-iframe.show {
+                height: 300px; /* スマートフォンでの表示時の高さ */
+            }
         }
     </style>
 </head>
@@ -315,16 +332,17 @@
 
         <section id="madamisu">
             <h2>マダミス・ストプレ・TRPG</h2>
-            <ul>
-                <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml">GM可能なシナリオ</a></li>
-                <li><a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml">通過済み・通過予定のシナリオ</a></li>
-            </ul>
+            <h3>通過or通過予定のシナリオ</h3>
+            <iframe id="madamisu-iframe" class="responsive-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml?widget=true&amp;headers=false"></iframe>
+
+            <h3>GM可能なシナリオ</h3>
+            <iframe id="madamisu-iframe" class="responsive-iframe"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml?widget=true&amp;headers=false"></iframe>
         </section>
 
         <section id="schedule">
             <h2>スケジュール</h2>
             <button class="schedule-toggle">スケジュールを表示</button>
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&showNav=0&showTabs=0&showCalendars=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" style="border-width:0"  frameborder="0" scrolling="no"></iframe>
+            <iframe id="schedule-iframe" class="responsive-iframe" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&showNav=0&showTabs=0&showCalendars=0&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23AD1457&color=%23EF6C00&color=%234285F4&color=%230B8043" style="border-width:0"  frameborder="0" scrolling="no"></iframe>
         </section>
 
         <section id="sns">
@@ -350,10 +368,11 @@
             const sections = document.querySelectorAll("section");
             const navLinksPC = document.querySelectorAll('nav a');
             const navLinksBottom = document.querySelectorAll('.bottom-nav a');
-            const iframe = document.querySelector("iframe");
+            const scheduleIframe = document.getElementById("schedule-iframe");
             const scheduleToggle = document.querySelector(".schedule-toggle");
             const navElement = document.querySelector('nav');
             const navHeight = navElement ? navElement.offsetHeight : 0;
+            const madamisuIframe = document.getElementById("madamisu-iframe");
 
             // ページ読み込み時に最初のセクションをアクティブにする
             if (sections.length > 0) {
@@ -412,11 +431,19 @@
                 });
             });
 
-            if (scheduleToggle && iframe) {
+            // スケジュールiframeの表示・非表示処理
+            if (scheduleToggle && scheduleIframe) {
                 scheduleToggle.addEventListener("click", function () {
-                    iframe.classList.toggle("show");
-                    scheduleToggle.textContent = iframe.classList.contains("show") ? "スケジュールを非表示" : "スケジュールを表示";
+                    scheduleIframe.classList.toggle("show");
+                    scheduleToggle.textContent = scheduleIframe.classList.contains("show") ? "スケジュールを非表示" : "スケジュールを表示";
                 });
+            }
+
+            // マダミスiframeを初期表示
+            if (madamisuIframe) {
+                madamisuIframe.style.display = 'block';
+                madamisuIframe.style.opacity = '1';
+                madamisuIframe.style.height = '400px';
             }
         });
     </script>
