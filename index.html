@@ -4,89 +4,436 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>むらひとの色々</title>
+    <!-- Tailwind CSSを読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans JP と Material Icons を読み込み -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- Interフォントを読み込み (Tailwindのデフォルト) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* カスタムCSSとアニメーション */
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background-color: #f0f2f5; /* 明るい背景色 */
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* スムーズスクロール */
+        }
+
+        /* ナビゲーションバーのスタイル */
+        nav {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav ul li a {
+            padding: 1rem 1.5rem;
+            display: block;
+            color: #555;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden; /* 波紋エフェクト用 */
+        }
+
+        nav ul li a:hover {
+            color: #3f51b5; /* Primary color */
+            background-color: #f5f5f5;
+        }
+
+        nav ul li a.active {
+            color: #3f51b5; /* Primary color */
+            border-bottom: 3px solid #3f51b5;
+        }
+
+        /* ボトムナビゲーションのスタイル */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem 0;
+        }
+
+        .bottom-nav a {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #757575; /* Secondary text color */
+            font-size: 0.75rem;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease-in-out;
+            border-radius: 0.5rem;
+        }
+
+        .bottom-nav a .material-icons {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .bottom-nav a.active {
+            color: #3f51b5; /* Primary color */
+        }
+
+        .bottom-nav a:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* セクションのスタイル (カード風) */
+        section {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* スクロールアニメーション用 */
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        section.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ボタンのスタイル */
+        .material-button {
+            background-color: #3f51b5; /* Primary color */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            position: relative;
+            overflow: hidden; /* 波紋エフェクト用 */
+        }
+
+        .material-button:hover {
+            background-color: #303f9f; /* Darker shade on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .material-button:active {
+            background-color: #283593; /* Even darker on active */
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+        }
+
+        /* 波紋エフェクト */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: ripple-animation 0.6s linear forwards;
+            transform: scale(0);
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* iframeのスタイルとアニメーション */
+        .responsive-iframe {
+            width: 100%;
+            height: 0; /* 初期状態は非表示 */
+            overflow: hidden;
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out; /* スライドアニメーション */
+            opacity: 0;
+            margin-top: 1rem;
+        }
+
+        .responsive-iframe.show {
+            height: 400px; /* 表示時の高さ */
+            opacity: 1;
+        }
+
+        /* SNSアイコンのスタイル */
+        .sns-icon {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease-in-out;
+            border-radius: 0.5rem; /* 角丸 */
+        }
+
+        .sns-icon:hover {
+            transform: scale(1.1);
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* 小画面ではトップナビを非表示 */
+            }
+            .bottom-nav {
+                display: flex; /* 小画面ではボトムナビを表示 */
+            }
+            .container {
+                padding: 1rem;
+                margin-bottom: 4rem; /* ボトムナビの分スペースを確保 */
+            }
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            nav {
+                display: block; /* 大画面ではトップナビを表示 */
+            }
+            .bottom-nav {
+                display: none; /* 大画面ではボトムナビを非表示 */
+            }
+            .container {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 2rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <nav>
-        <div class="container">
-            <ul>
-                <li><a href="#introduction" class="active">自己紹介</a></li>
-                <li><a href="#madamisu">マダミス・ストプレ・TRPG</a></li>
-                <li><a href="#schedule">スケジュール</a></li>
-                <li><a href="#sns">SNS</a></li>
-                <li><a href="#bots">BOT</a></li>
+    <!-- トップナビゲーションバー -->
+    <nav class="hidden md:block">
+        <div class="container mx-auto flex justify-center py-4">
+            <ul class="flex space-x-4">
+                <li><a href="#introduction" class="nav-link active">自己紹介</a></li>
+                <li><a href="#madamisu" class="nav-link">マダミス・ストプレ・TRPG</a></li>
+                <li><a href="#schedule" class="nav-link">スケジュール</a></li>
+                <li><a href="#sns" class="nav-link">SNS</a></li>
+                <li><a href="#bots" class="nav-link">BOT</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="bottom-nav">
-        <a href="#introduction" class="active">
+    <!-- ボトムナビゲーションバー (モバイル用) -->
+    <div class="bottom-nav md:hidden">
+        <a href="#introduction" class="bottom-nav-link active">
             <i class="material-icons">person</i>
             自己紹介
         </a>
-        <a href="#madamisu">
+        <a href="#madamisu" class="bottom-nav-link">
             <i class="material-icons">casino</i>
             マダミス
         </a>
-        <a href="#schedule">
+        <a href="#schedule" class="bottom-nav-link">
             <i class="material-icons">calendar_today</i>
             スケジュール
         </a>
-        <a href="#sns">
+        <a href="#sns" class="bottom-nav-link">
             <i class="material-icons">share</i>
             SNS
         </a>
-        <a href="#bots">
+        <a href="#bots" class="bottom-nav-link">
             <i class="material-icons">android</i>
             BOT
         </a>
     </div>
 
-    <div class="container">
-        <section id="introduction">
-            <h2>自己紹介</h2>
-            <p>日々プログラムを書くSE♂。</p>
-            <p>最近は、マーダーミステリー・ストーリープレイング・TRPG・スプラトゥーンで主に遊んでいる。</p>
+    <div class="container mx-auto px-4 md:px-0 mt-8">
+        <!-- 自己紹介セクション -->
+        <section id="introduction" class="section-card">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">自己紹介</h2>
+            <p class="text-lg mb-2">日々プログラムを書くSE♂。</p>
+            <p class="text-lg">最近は、マーダーミステリー・ストーリープレイング・TRPG・スプラトゥーンで主に遊んでいる。</p>
         </section>
 
-        <section id="madamisu">
-            <h2>マダミス・ストプレ・TRPG</h2>
-            <h3>通過or通過予定のシナリオ</h3>
-            <button id="passed-scenario-toggle" class="schedule-toggle">通過済み・予定シナリオを表示</button>
+        <!-- マダミス・ストプレ・TRPGセクション -->
+        <section id="madamisu" class="section-card">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">マダミス・ストプレ・TRPG</h2>
+            <h3 class="text-2xl font-semibold mb-4 text-gray-700">通過or通過予定のシナリオ</h3>
+            <button id="passed-scenario-toggle" class="material-button mb-4">通過済み・予定シナリオを表示</button>
             <iframe id="passed-scenario-iframe" class="responsive-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml?widget=true&amp;headers=false"></iframe>
 
-            <h3>GM可能なシナリオ</h3>
-            <button id="gm-scenario-toggle" class="schedule-toggle">GM可能なシナリオを表示</button>
+            <h3 class="text-2xl font-semibold mb-4 mt-8 text-gray-700">GM可能なシナリオ</h3>
+            <button id="gm-scenario-toggle" class="material-button mb-4">GM可能なシナリオを表示</button>
             <iframe id="gm-scenario-iframe" class="responsive-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml?widget=true&amp;headers=false"></iframe>
         </section>
 
-        <section id="schedule">
-            <h2>スケジュール</h2>
-            <button class="schedule-toggle">スケジュールを表示</button>
-            <iframe id="schedule-iframe" class="responsive-iframe" src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2YwNDI1ZWUzNjZjZWZiMzI0MDlhM2UwYTIwMDY1NGRmMjA1MjgyNmQzNThjMDIxODllNDc1MThlNzE0MWQ5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%234285F4&color=%23D81B60&color=%23EF6C00&color=%233F51B5&color=%23009688" style="border-width:0"  frameborder="0" scrolling="no"></iframe>
+        <!-- スケジュールセクション -->
+        <section id="schedule" class="section-card">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">スケジュール</h2>
+            <button id="schedule-toggle" class="material-button mb-4">スケジュールを表示</button>
+            <iframe id="schedule-iframe" class="responsive-iframe" src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&src=dorin.a.moon.812@gmail.com&src=5265e4ec056e0bd5edda756389e29b529cdb96256c97fb3347b26bcb2dce9e67@group.calendar.google.com&src=40850085d7950f4f174b4fa5f40bc5669cdcfccf572e2966f20bd3ab888c3a96f@group.calendar.google.com&src=cf0425ee366cef32409a3e0a200654df2052826d358c02189e47518e7141d93@group.calendar.google.com&src=ja.japanese#holiday@group.v.calendar.google.com&color=%234285F4&color=%23D81B60&color=%23EF6C00&color=%233F51B5&color=%23009688" style="border-width:0" frameborder="0" scrolling="no"></iframe>
         </section>
 
-        <section id="sns">
-            <h2>SNS等</h2>
-            <ul>
-                <li><a href="https://x.com/murahito130"><img class="sns-icon" src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png" alt="X" />X (旧Twitter)</a></li>
-                <li><a href="https://github.com/murahito130/murahito130.github.io"><img class="sns-icon" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github" />github</a></li>
-                <li><a href="https://lounge.nintendo.com/friendcode/0645-0135-9421/C7V6SDr8Vp"><img class="sns-icon" src="https://www.nintendo.com/jp/hardware/switch/img/10-mv/logo-with-shadow.png" alt="NSW" />Nintendo Switch フレンドコード SW-0645-0135-9421</a></li>
+        <!-- SNS等セクション -->
+        <section id="sns" class="section-card">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">SNS等</h2>
+            <ul class="space-y-4">
+                <li>
+                    <a href="https://x.com/murahito130" class="flex items-center text-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
+                        <img class="sns-icon" src="https://about.x.com/content/dam/about-twitter/x/brand-toolkit/logo-black.png" alt="X" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/333333?text=X';" />
+                        X (旧Twitter)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/murahito130/murahito130.github.io" class="flex items-center text-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
+                        <img class="sns-icon" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="github" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/333333?text=GH';" />
+                        github
+                    </a>
+                </li>
+                <li>
+                    <a href="https://lounge.nintendo.com/friendcode/0645-0135-9421/C7V6SDr8Vp" class="flex items-center text-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">
+                        <img class="sns-icon" src="https://www.nintendo.com/jp/hardware/switch/img/10-mv/logo-with-shadow.png" alt="NSW" onerror="this.onerror=null;this.src='https://placehold.co/32x32/cccccc/333333?text=NSW';" />
+                        Nintendo Switch フレンドコード SW-0645-0135-9421
+                    </a>
+                </li>
             </ul>
         </section>
 
-        <section id="bots">
-            <h2>公開しているBOTとかアプリとか</h2>
-            <ul>
-                <li><a href="https://qiita.com/murahito/items/127da46d03a510f98bca">アーカイブ君</a></li>
-                <li><a href="https://github.com/murahito130/Google-Calendar-to-Discord-Notifier">Google Calendar to Discord Notifier</a></li>
+        <!-- 公開しているBOTとかアプリとかセクション -->
+        <section id="bots" class="section-card">
+            <h2 class="text-3xl font-bold mb-4 text-gray-800">公開しているBOTとかアプリとか</h2>
+            <ul class="space-y-4">
+                <li><a href="https://qiita.com/murahito/items/127da46d03a510f98bca" class="text-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">アーカイブ君</a></li>
+                <li><a href="https://github.com/murahito130/Google-Calendar-to-Discord-Notifier" class="text-lg text-blue-600 hover:text-blue-800 transition-colors duration-300">Google Calendar to Discord Notifier</a></li>
             </ul>
         </section>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // DOMContentLoadedイベントでスクリプトを実行
+        document.addEventListener('DOMContentLoaded', () => {
+            // ナビゲーションリンクのアクティブ状態を管理する関数
+            const setupNavLinks = (selector, activeClass) => {
+                const links = document.querySelectorAll(selector);
+                links.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        // 既存のアクティブクラスを削除
+                        links.forEach(l => l.classList.remove(activeClass));
+                        // クリックされたリンクにアクティブクラスを追加
+                        this.classList.add(activeClass);
+                    });
+                });
+            };
+
+            // トップナビゲーションリンクのアクティブ状態を設定
+            setupNavLinks('.nav-link', 'active');
+            // ボトムナビゲーションリンクのアクティブ状態を設定
+            setupNavLinks('.bottom-nav-link', 'active');
+
+            // スクロール時にナビゲーションリンクのアクティブ状態を更新する関数
+            const updateNavLinkActiveState = () => {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-link, .bottom-nav-link');
+                let currentActiveSectionId = '';
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - (window.innerHeight * 0.3); // ビューポートの30%上から検知
+                    const sectionBottom = section.offsetTop + section.offsetHeight - (window.innerHeight * 0.3);
+
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                        currentActiveSectionId = section.id;
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            };
+
+            // スクロールイベントリスナーを追加
+            window.addEventListener('scroll', updateNavLinkActiveState);
+            // ページロード時にも一度実行
+            updateNavLinkActiveState();
+
+            // スクロールアニメーション (セクションのフェードイン/スライドイン)
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // 一度表示されたら監視を停止
+                    }
+                });
+            }, {
+                threshold: 0.2, // セクションの20%が見えたら発火
+                rootMargin: '0px 0px -100px 0px' // ビューポートの下から100px手前で発火
+            });
+
+            document.querySelectorAll('section').forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // iframeの表示/非表示を切り替える関数
+            const setupIframeToggle = (buttonId, iframeId) => {
+                const button = document.getElementById(buttonId);
+                const iframe = document.getElementById(iframeId);
+
+                if (button && iframe) {
+                    button.addEventListener('click', () => {
+                        iframe.classList.toggle('show');
+                        if (iframe.classList.contains('show')) {
+                            button.textContent = button.textContent.replace('表示', '非表示');
+                        } else {
+                            button.textContent = button.textContent.replace('非表示', '表示');
+                        }
+                    });
+                }
+            };
+
+            // 各iframeのトグルを設定
+            setupIframeToggle('passed-scenario-toggle', 'passed-scenario-iframe');
+            setupIframeToggle('gm-scenario-toggle', 'gm-scenario-iframe');
+            setupIframeToggle('schedule-toggle', 'schedule-iframe');
+
+            // 波紋エフェクトの追加
+            const addRippleEffect = (element) => {
+                element.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+
+                    // クリック位置に基づいて波紋の中心を設定
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - (size / 2);
+                    const y = e.clientY - rect.top - (size / 2);
+
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+
+                    this.appendChild(ripple);
+
+                    // アニメーション終了後に波紋要素を削除
+                    ripple.addEventListener('animationend', () => {
+                        ripple.remove();
+                    });
+                });
+            };
+
+            // ナビゲーションリンクとボタンに波紋エフェクトを適用
+            document.querySelectorAll('.nav-link, .bottom-nav-link, .material-button').forEach(el => {
+                addRippleEffect(el);
+            });
+        });
+    </script>
 </body>
 </html>
