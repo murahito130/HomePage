@@ -20,7 +20,6 @@
             --highlight-color: #533483;
             --card-bg: #222831; /* カードの背景色 */
         }
-
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             background: linear-gradient(45deg, var(--bg-color-dark) 0%, var(--accent-color-2) 100%);
@@ -31,13 +30,11 @@
             scroll-behavior: smooth;
             overflow-x: hidden; /* 横スクロール防止 */
         }
-
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         /* ナビゲーションバーのスタイル */
         nav {
             background-color: rgba(34, 40, 49, 0.9); /* 半透明のカード背景色 */
@@ -49,7 +46,6 @@
             transition: all 0.4s ease-in-out;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         nav ul li a {
             padding: 1rem 1.5rem;
             display: block;
@@ -59,7 +55,6 @@
             position: relative;
             overflow: hidden;
         }
-
         nav ul li a::after {
             content: '';
             position: absolute;
@@ -71,19 +66,15 @@
             transition: all 0.3s ease-in-out;
             transform: translateX(-50%);
         }
-
         nav ul li a:hover::after {
             width: 100%;
         }
-
         nav ul li a.active {
             color: var(--accent-color-1);
         }
-
         nav ul li a.active::after {
             width: 100%;
         }
-
         /* ボトムナビゲーションのスタイル */
         .bottom-nav {
             position: fixed;
@@ -99,7 +90,6 @@
             padding: 0.5rem 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .bottom-nav a {
             flex: 1;
             display: flex;
@@ -112,22 +102,18 @@
             transition: all 0.3s ease-in-out;
             border-radius: 0.5rem;
         }
-
         .bottom-nav a .material-icons {
             font-size: 1.5rem;
             margin-bottom: 0.25rem;
             transition: transform 0.3s ease-in-out;
         }
-
         .bottom-nav a:hover .material-icons {
             transform: translateY(-3px);
             color: var(--accent-color-1);
         }
-
         .bottom-nav a.active {
             color: var(--accent-color-1);
         }
-
         /* セクションのスタイル (カード風) */
         section {
             background-color: var(--card-bg);
@@ -140,12 +126,10 @@
             opacity: 0;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         section.visible {
             transform: translateY(0) scale(1);
             opacity: 1;
         }
-
         /* ボタンのスタイル */
         .cool-button {
             background: linear-gradient(90deg, var(--accent-color-1) 0%, var(--highlight-color) 100%);
@@ -163,18 +147,15 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-
         .cool-button:hover {
             background: linear-gradient(90deg, var(--highlight-color) 0%, var(--accent-color-1) 100%);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-color-1); /* グローエフェクト */
             transform: translateY(-3px) scale(1.02);
         }
-
         .cool-button:active {
             transform: translateY(0);
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
-
         /* 波紋エフェクト (ボタンとリンクに適用) */
         .ripple {
             position: absolute;
@@ -184,14 +165,12 @@
             transform: scale(0);
             pointer-events: none;
         }
-
         @keyframes ripple-animation {
             to {
                 transform: scale(4);
                 opacity: 0;
             }
         }
-
         /* iframeのスタイルとアニメーション */
         .responsive-iframe {
             width: 100%;
@@ -205,12 +184,10 @@
             margin-top: 1.5rem;
             background-color: #ffffff; /* iframeの背景を白に */
         }
-
         .responsive-iframe.show {
             height: 400px; /* 表示時の高さ */
             opacity: 1;
         }
-
         /* SNSアイコンのスタイル */
         .sns-icon {
             width: 2.5rem;
@@ -220,24 +197,20 @@
             border-radius: 0.5rem;
             filter: grayscale(50%); /* デフォルトで少しモノクロ */
         }
-
         .sns-icon:hover {
             transform: scale(1.15) rotate(5deg);
             filter: grayscale(0%); /* ホバーでカラーに */
         }
-
         /* リンクのスタイル */
         a {
             color: var(--accent-color-1);
             text-decoration: none;
             transition: color 0.3s ease-in-out;
         }
-
         a:hover {
             color: var(--highlight-color);
             text-decoration: underline;
         }
-
         /* レスポンシブデザイン */
         @media (max-width: 768px) {
             nav {
@@ -254,7 +227,6 @@
                 padding: 1.5rem;
             }
         }
-
         @media (min-width: 769px) {
             nav {
                 display: block;
@@ -283,7 +255,6 @@
             </ul>
         </div>
     </nav>
-
     <!-- ボトムナビゲーションバー (モバイル用) -->
     <div class="bottom-nav md:hidden">
         <a href="#introduction" class="bottom-nav-link active">
@@ -307,7 +278,6 @@
             BOT
         </a>
     </div>
-
     <div class="container mx-auto px-4 md:px-0 mt-8">
         <!-- 自己紹介セクション -->
         <section id="introduction" class="section-card">
@@ -315,26 +285,22 @@
             <p class="text-lg mb-2">日々プログラムを書くSE♂。</p>
             <p class="text-lg">最近は、マーダーミステリー・ストーリープレイング・TRPG・スプラトゥーンで主に遊んでいる。</p>
         </section>
-
         <!-- マダミス・ストプレ・TRPGセクション -->
         <section id="madamisu" class="section-card">
             <h2 class="text-3xl font-bold mb-4 text-gray-100">マダミス・ストプレ・TRPG</h2>
             <h3 class="text-2xl font-semibold mb-4 text-gray-200">通過or通過予定のシナリオ</h3>
             <button id="passed-scenario-toggle" class="cool-button mb-4">通過済み・予定シナリオを表示</button>
             <iframe id="passed-scenario-iframe" class="responsive-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSKeyDIJNmixBw3sXOHaNkdYRYRnQWJS7SYrGIa8JUgiFTi8Qw1f6zU-NWGJz17sjbNZu26bn6r6BNj/pubhtml?widget=true&amp;headers=false"></iframe>
-
             <h3 class="text-2xl font-semibold mb-4 mt-8 text-gray-200">GM可能なシナリオ</h3>
             <button id="gm-scenario-toggle" class="cool-button mb-4">GM可能なシナリオを表示</button>
             <iframe id="gm-scenario-iframe" class="responsive-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTfwTKFVBioZ7ipaD6x8tT_ANSpvpDLQJ0QXBlI6tHyVNPikyOAG-3jg_nIcFAetYQAI0FIabX2E0Yl/pubhtml?widget=true&amp;headers=false"></iframe>
         </section>
-
         <!-- スケジュールセクション -->
         <section id="schedule" class="section-card">
             <h2 class="text-3xl font-bold mb-4 text-gray-100">スケジュール</h2>
             <button id="schedule-toggle" class="cool-button mb-4">スケジュールを非表示</button>
-            <iframe id="schedule-iframe" class="responsive-iframe show" src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&src=ZG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=Y2YwNDI1ZWUzNjZjZWZiMzI0MDlhM2UwYTIwMDY1NGRmMjA1MjgyNmQzNThjMDIxODllNDc1MThlNzE0MWQ5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%234285F4&color=%23D81B60&color=%23EF6C00&color=%233F51B5&color=%23009688" style="border-width:0" frameborder="0" scrolling="no"></iframe>
+            <iframe id="schedule-iframe" class="responsive-iframe show" src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Asia%2FTokyo&showPrint=0&showTitle=0&src=dG9yaW4uYS5tb29uLjgxMkBnbWFpbC5jb20&src=NTI2NWU0ZWMwNTZlMGJkNWVkZGE3NTYzODllMjliNWUyOWNkYjk2MjU2Yzk3ZmIzMzQ3YjI2YmNiMmRjOWU2N0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDA4NTAwODVkNzk1MGY0ZjE3NGI0ZmE3NGI0ZmE1ZjQwYmM1NjY5Y2RmY2NmNTcyZTI5NjZmMjBiZDNhYjg4OGMzYTk2ZkBncm91cC5jYWxlbmVuZGFyLmdvb2dsZS5jb20&src=Y2YwNDI1ZWUzNjZjZWZiMzI0MDlhM2UwYTIwMDY1NGRmMjA1MjgyNmQzNThjMDIxODllNDc1MThlNzE0MWQ5M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%234285F4&color=%23D81B60&color=%23EF6C00&color=%233F51B5&color=%23009688" style="border-width:0" frameborder="0" scrolling="no"></iframe>
         </section>
-
         <!-- SNS等セクション -->
         <section id="sns" class="section-card">
             <h2 class="text-3xl font-bold mb-4 text-gray-100">SNS等</h2>
@@ -359,7 +325,6 @@
                 </li>
             </ul>
         </section>
-
         <!-- 公開しているBOTとかアプリとかセクション -->
         <section id="bots" class="section-card">
             <h2 class="text-3xl font-bold mb-4 text-gray-100">公開しているBOTとかアプリとか</h2>
@@ -369,7 +334,6 @@
             </ul>
         </section>
     </div>
-
     <script>
         // DOMContentLoadedイベントでスクリプトを実行
         document.addEventListener('DOMContentLoaded', () => {
@@ -385,7 +349,6 @@
                     });
                 });
             };
-
             // トップナビゲーションリンクのアクティブ状態を設定
             setupNavLinks('.nav-link', 'active');
             // ボトムナビゲーションリンクのアクティブ状態を設定
@@ -398,12 +361,20 @@
                 let currentActiveSectionId = '';
 
                 // 各セクションがビューポートのどの位置にあるかを確認
+                // ビューポートの中央に近いセクションをアクティブにする
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - (window.innerHeight * 0.3); // ビューポートの30%上から検知
-                    const sectionBottom = section.offsetTop + section.offsetHeight - (window.innerHeight * 0.3);
+                    const rect = section.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
 
-                    if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
-                        currentActiveSectionId = section.id;
+                    // セクションの中心がビューポートの中心に近いほど優先
+                    const sectionCenter = rect.top + rect.height / 2;
+                    const viewportCenter = viewportHeight / 2;
+
+                    // セクションの一部でもビューポートに入っていれば対象とする
+                    if (rect.top < viewportHeight && rect.bottom > 0) {
+                        if (currentActiveSectionId === '' || Math.abs(sectionCenter - viewportCenter) < Math.abs(document.getElementById(currentActiveSectionId).getBoundingClientRect().top + document.getElementById(currentActiveSectionId).getBoundingClientRect().height / 2 - viewportCenter)) {
+                            currentActiveSectionId = section.id;
+                        }
                     }
                 });
 
@@ -430,8 +401,8 @@
                     }
                 });
             }, {
-                threshold: 0.2, // セクションの20%が見えたら発火
-                rootMargin: '0px 0px -100px 0px' // ビューポートの下から100px手前で発火
+                threshold: 0, // セクションが少しでも見えたら発火
+                rootMargin: '0px' // ビューポートの端を基準にする
             });
 
             document.querySelectorAll('section').forEach(section => {
@@ -442,7 +413,6 @@
             const setupIframeToggle = (buttonId, iframeId) => {
                 const button = document.getElementById(buttonId);
                 const iframe = document.getElementById(iframeId);
-
                 if (button && iframe) {
                     button.addEventListener('click', () => {
                         iframe.classList.toggle('show');
@@ -455,12 +425,11 @@
                     });
                 }
             };
-
             // 各iframeのトグルを設定
             setupIframeToggle('passed-scenario-toggle', 'passed-scenario-iframe');
             setupIframeToggle('gm-scenario-toggle', 'gm-scenario-iframe');
             setupIframeToggle('schedule-toggle', 'schedule-iframe');
-            
+                        
             // ページロード時に、初期表示されているiframeのボタンテキストを更新
             document.querySelectorAll('.responsive-iframe.show').forEach(iframe => {
                 if (iframe.id === 'schedule-iframe') { // スケジュールiframeの場合のみ
@@ -476,26 +445,21 @@
                 element.addEventListener('click', function(e) {
                     const ripple = document.createElement('span');
                     ripple.classList.add('ripple');
-
                     // クリック位置に基づいて波紋の中心を設定
                     const rect = this.getBoundingClientRect();
                     const size = Math.max(rect.width, rect.height);
                     const x = e.clientX - rect.left - (size / 2);
                     const y = e.clientY - rect.top - (size / 2);
-
                     ripple.style.width = ripple.style.height = `${size}px`;
                     ripple.style.left = `${x}px`;
                     ripple.style.top = `${y}px`;
-
                     this.appendChild(ripple);
-
                     // アニメーション終了後に波紋要素を削除
                     ripple.addEventListener('animationend', () => {
                         ripple.remove();
                     });
                 });
             };
-
             // ナビゲーションリンクとボタンに波紋エフェクトを適用
             document.querySelectorAll('.nav-link, .bottom-nav-link, .cool-button').forEach(el => {
                 addRippleEffect(el);
