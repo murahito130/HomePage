@@ -340,12 +340,35 @@
             // ナビゲーションリンクのアクティブ状態を管理する関数
             const setupNavLinks = (selector, activeClass) => {
                 const links = document.querySelectorAll(selector);
+                const navBar = document.querySelector('nav'); // トップナビゲーションバーの要素を取得
+
                 links.forEach(link => {
                     link.addEventListener('click', function(e) {
+                        e.preventDefault(); // デフォルトのアンカー動作を停止
+
                         // 既存のアクティブクラスを削除
                         links.forEach(l => l.classList.remove(activeClass));
                         // クリックされたリンクにアクティブクラスを追加
                         this.classList.add(activeClass);
+
+                        const targetId = this.getAttribute('href').substring(1); // ターゲットセクションのIDを取得
+                        const targetSection = document.getElementById(targetId);
+
+                        if (targetSection) {
+                            let offset = 0;
+                            // トップナビゲーションバーが表示されている場合のみオフセットを適用
+                            if (window.innerWidth >= 769 && navBar) {
+                                offset = navBar.offsetHeight;
+                            }
+
+                            // スクロール位置を計算
+                            const scrollPosition = targetSection.offsetTop - offset;
+
+                            window.scrollTo({
+                                top: scrollPosition,
+                                behavior: 'smooth'
+                            });
+                        }
                     });
                 });
             };
@@ -358,27 +381,29 @@
             const updateNavLinkActiveState = () => {
                 const sections = document.querySelectorAll('section');
                 const navLinks = document.querySelectorAll('.nav-link, .bottom-nav-link');
+                const navBar = document.querySelector('nav');
+                // トップナビゲーションバーが表示されている場合のみ高さを取得、それ以外は0
+                const fixedHeaderHeight = (window.innerWidth >= 769 && navBar) ? navBar.offsetHeight : 0;
+
                 let currentActiveSectionId = '';
 
-                // 各セクションがビューポートのどの位置にあるかを確認
-                // ビューポートの中央に近いセクションをアクティブにする
-                sections.forEach(section => {
+                // セクションを逆順にループし、現在ビューポートの最上部にあるセクションを見つける
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
                     const rect = section.getBoundingClientRect();
-                    const viewportHeight = window.innerHeight;
-
-                    // セクションの中心がビューポートの中心に近いほど優先
-                    const sectionCenter = rect.top + rect.height / 2;
-                    const viewportCenter = viewportHeight / 2;
-
-                    // セクションの一部でもビューポートに入っていれば対象とする
-                    if (rect.top < viewportHeight && rect.bottom > 0) {
-                        if (currentActiveSectionId === '' || Math.abs(sectionCenter - viewportCenter) < Math.abs(document.getElementById(currentActiveSectionId).getBoundingClientRect().top + document.getElementById(currentActiveSectionId).getBoundingClientRect().height / 2 - viewportCenter)) {
-                            currentActiveSectionId = section.id;
-                        }
+                    // セクションのトップが固定ヘッダーのすぐ下またはそれより上（かつセクションのボトムが固定ヘッダーより下）の場合、そのセクションをアクティブとみなす
+                    if (rect.top <= fixedHeaderHeight && rect.bottom > fixedHeaderHeight) {
+                        currentActiveSectionId = section.id;
+                        break; // 最も上にある表示中のセクションが見つかったのでループを終了
                     }
-                });
+                }
 
-                // アクティブなセクションに対応するナビゲーションリンクをアクティブにする
+                // もしどのセクションもアクティブにならなかった場合（例: ページの一番上など）、最初のセクションをデフォルトでアクティブにする
+                if (!currentActiveSectionId && sections.length > 0) {
+                    currentActiveSectionId = sections[0].id;
+                }
+
+                // ナビゲーションリンクのアクティブクラスを更新
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
